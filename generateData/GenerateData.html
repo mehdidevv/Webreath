@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1 align="center">Les donnés sont généré tous les 30sec pour chaque modules</h1>
+  <p id="counter"></p>
+  <script>
+    let counter=0;
+    let p= document.getElementById("counter");
+    p.innerText=`Les donnés ont été généré ${counter} fois`;
+    const generateData = async () => {
+    console.log("generateData() was called")
+    const response = await fetch("http://localhost:8000/api/generate", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    counter++;
+    p.innerText=`Les donnés ont été généré ${counter} fois`;
+    };
+    setInterval(generateData, 30000); //generate Data every 30 seconds
+    
+  </script>
+</body>
+</html>
